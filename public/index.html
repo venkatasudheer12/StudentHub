@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
+<title>StudentHub - Student & Admin Portal</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='36' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="booting">
+
+<!-- ================= AUTHENTICATION ================= -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="logo-icon">S</div>
+      <h1>Student<span>Hub</span></h1>
+      <p>College Student Platform</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-auth="studentLogin" type="button">Student Login</button>
+      <button class="auth-tab" data-auth="register" type="button">Register</button>
+      <button class="auth-tab" data-auth="adminLogin" type="button">Admin Login</button>
+    </div>
+
+    <div class="auth-error" id="authError" role="alert" hidden></div>
+
+    <form class="auth-form active" id="studentLogin" autocomplete="on">
+      <h2>Welcome Back 👋</h2>
+      <p class="subtitle">Login to access your StudentHub account.</p>
+      <div class="auth-group"><label for="studentLoginEmail">Student Email</label>
+        <input id="studentLoginEmail" name="email" type="email" autocomplete="username" placeholder="student@example.com" required></div>
+      <div class="auth-group"><label for="studentLoginPassword">Password</label>
+        <input id="studentLoginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></div>
+      <button class="auth-submit" type="submit">Login as Student</button>
+      <div class="auth-hint">New student? Use the Register tab to create an account.</div>
+    </form>
+
+    <form class="auth-form" id="register" autocomplete="on">
+      <h2>Create Student Account 🎓</h2>
+      <p class="subtitle">Register once and start using StudentHub.</p>
+      <div class="auth-row">
+        <div class="auth-group"><label for="registerName">Full Name</label>
+          <input id="registerName" name="name" type="text" autocomplete="name" placeholder="Your name" required maxlength="80"></div>
+        <div class="auth-group"><label for="registerId">Student ID</label>
+          <input id="registerId" name="studentId" type="text" placeholder="STU001" required maxlength="30"></div>
+      </div>
+      <div class="auth-group"><label for="registerEmail">Email</label>
+        <input id="registerEmail" name="email" type="email" autocomplete="email" placeholder="student@example.com" required></div>
+      <div class="auth-row">
+        <div class="auth-group"><label for="registerDepartment">Department</label>
+          <select id="registerDepartment" name="department" required><option value="">Select</option></select></div>
+        <div class="auth-group"><label for="registerYear">Year</label>
+          <select id="registerYear" name="year" required><option value="">Select</option></select></div>
+      </div>
+      <div class="auth-group"><label for="registerPassword">Password</label>
+        <input id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="Minimum 8 characters" required></div>
+      <button class="auth-submit" type="submit">Create Account</button>
+    </form>
+
+    <form class="auth-form" id="adminLogin" autocomplete="on">
+      <div class="admin-badge">ADMIN ACCESS</div>
+      <h2>Administrator Login 🔐</h2>
+      <p class="subtitle">Manage StudentHub content and users.</p>
+      <div class="auth-group"><label for="adminEmail">Admin Email</label>
+        <input id="adminEmail" name="email" type="email" autocomplete="username" placeholder="admin@studenthub.com" required></div>
+      <div class="auth-group"><label for="adminPassword">Admin Password</label>
+        <input id="adminPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter admin password" required></div>
+      <button class="auth-submit" type="submit">Login as Admin</button>
+    </form>
+  </div>
+</div>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar" id="sidebar">
+  <div class="logo"><div class="logo-icon">S</div><h2>Student<span>Hub</span></h2></div>
+
+  <div class="menu-title">Main Menu</div>
+  <a class="nav-link" href="#/dashboard" data-nav="dashboard"><span class="nav-icon">🏠</span>Dashboard</a>
+  <a class="nav-link" href="#/notes" data-nav="notes"><span class="nav-icon">📚</span>Notes</a>
+  <a class="nav-link" href="#/internships" data-nav="internships"><span class="nav-icon">💼</span>Internships</a>
+  <a class="nav-link" href="#/jobs" data-nav="jobs"><span class="nav-icon">💻</span>Jobs</a>
+  <a class="nav-link" href="#/papers" data-nav="papers"><span class="nav-icon">📝</span>Question Papers</a>
+
+  <div class="menu-title">Community</div>
+  <a class="nav-link" href="#/announcements" data-nav="announcements"><span class="nav-icon">📢</span>Announcements</a>
+  <a class="nav-link" href="#/events" data-nav="events"><span class="nav-icon">📅</span>Events</a>
+  <a class="nav-link" href="#/community" data-nav="community"><span class="nav-icon">🤝</span>Community</a>
+
+  <div class="menu-title">Account</div>
+  <a class="nav-link" href="#/activity" data-nav="activity"><span class="nav-icon">📌</span>My Activity</a>
+  <a class="nav-link" href="#/profile" data-nav="profile"><span class="nav-icon">👤</span>Profile</a>
+  <a class="nav-link admin-only" href="#/admin" data-nav="admin" hidden><span class="nav-icon">🛠️</span>Admin Panel</a>
+
+  <div class="sidebar-bottom">
+    <a class="nav-link" href="#" data-action="theme"><span class="nav-icon">🌙</span>Dark Mode</a>
+    <a class="nav-link logout-link" href="#" data-action="logout"><span class="nav-icon">🚪</span>Logout</a>
+  </div>
+</aside>
+<div class="scrim" id="scrim" data-action="close-sidebar"></div>
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+  <header class="topbar">
+    <div class="top-actions">
+      <button class="icon-btn mobile-menu" data-action="toggle-sidebar" aria-label="Menu">☰</button>
+    </div>
+
+    <form class="search" id="searchForm" role="search">
+      <span aria-hidden="true">🔍</span>
+      <input id="globalSearch" type="search" placeholder="Search StudentHub..." autocomplete="off" aria-label="Search StudentHub">
+    </form>
+
+    <div class="top-actions">
+      <div class="notif-wrap">
+        <button class="icon-btn" id="bellBtn" data-action="bell" aria-label="Notifications">🔔<span class="badge" id="bellBadge" hidden>0</span></button>
+        <div class="notif-panel" id="notifPanel" hidden></div>
+      </div>
+      <a class="profile" href="#/profile">
+        <div class="avatar" id="avatar">S</div>
+        <div class="profile-info"><strong id="profileName">Student</strong><small id="profileRole"></small></div>
+      </a>
+    </div>
+  </header>
+
+  <section class="content"><div id="view" aria-live="polite"></div></section>
+</main>
+
+<div class="modal-overlay" id="modal" hidden></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>

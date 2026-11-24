@@ -1,0 +1,26 @@
+# Fly.io — run: fly launch --copy-config --no-deploy ; fly volumes create studenthub_data --size 1 ; fly secrets set ADMIN_PASSWORD=... ; fly deploy
+app = "studenthub-change-me"
+primary_region = "bom"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "3000"
+  NODE_ENV = "production"
+  DATA_DIR = "/data"
+
+[mounts]
+  source = "studenthub_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  [[http_service.checks]]
+    path = "/healthz"
+    interval = "30s"
+    timeout = "5s"

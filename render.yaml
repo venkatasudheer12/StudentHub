@@ -1,0 +1,21 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Free plan: no persistent disk, so the database resets on every deploy/restart
+# (seed content comes back, but accounts/applications/uploads are lost).
+# For real use switch plan to "starter" and uncomment the disk block below.
+services:
+  - type: web
+    name: studenthub
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_EMAIL
+        value: admin@studenthub.com
+      - key: ADMIN_PASSWORD
+        generateValue: true     # shown in the Render dashboard -> Environment
+    # disk:
+    #   name: studenthub-data
+    #   mountPath: /data
+    #   sizeGB: 1
